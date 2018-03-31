@@ -53,7 +53,7 @@ class DefaultController extends Controller
             $entityManager->flush();
 
             $this->addFlash(
-                    'notice', 'Your changes were saved!'
+                    'notice', 'Your message was saved!'
             );
         }
         return $this->render( 'default/anno.html.twig', [

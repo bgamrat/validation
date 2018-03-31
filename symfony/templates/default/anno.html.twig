@@ -13,12 +13,14 @@
         </div>
     {% endfor %}
 
-    <div class="form-block">
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit">Go</button>
-        {{ form_end(form) }}
-    </div>
+    {% if not form.vars.submitted or not form.vars.valid %}
+        <div class="form-block">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button id="{{form.vars.name}}-btn" type="submit">Go</button>
+            {{ form_end(form) }}
+        </div>
+    {% endif %}
 
 {% endblock %}
 {% block javascripts %}
