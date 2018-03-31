@@ -1,0 +1,22 @@
+{% block title %}Contact Requests{% endblock %}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link href="css/contact-us.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <h1>{{ block('title') }}</h1>
+
+    <ul>
+        {% for contact in contacts %}
+            <li>
+                <strong>{{contact.id}}</strong>
+                {{contact.name}}<br>
+                {{contact.email}}<br>
+                {{contact.message}}
+            </li>
+
+        {% endfor %}
+    </ul>
+
+{% endblock %}

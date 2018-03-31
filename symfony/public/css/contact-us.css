@@ -1,0 +1,41 @@
+body {
+    width: 100%;
+    overflow: auto;
+}
+.contact-us {
+    width: 400px;
+    margin: 0 auto;
+    padding: 25px;
+    border: 1px solid #000;
+}
+.row {
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+}   
+form div {
+    margin: 15px;
+}
+label {
+    vertical-align: top;
+    display:block;
+    font-weight: 800;
+}
+label.required::before {
+    content:"*";
+    color: #800;
+    font-weight: 700;
+}
+/* Prevent the browser from changing the styling on invalid inputs */
+.form-control[required]:invalid {
+    box-shadow: none;
+}
+/* Style for inputs with valid data */
+.form-control:valid {
+    box-shadow: 0 0 5px 3px #2f2;
+}
+/* Style for inputs with invalid data */
+.form-control.invalid,
+.form-control.invalid[required] {
+    box-shadow: 0 0 3px 3px #f44277;
+}

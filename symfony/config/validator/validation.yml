@@ -1,0 +1,14 @@
+App\Entity\Contact:
+    properties:
+        name:
+            - Regex:
+                pattern: '/^\w{2,} \w{2,}$/'
+                htmlPattern: '^\w{2,} \w{2,}$'
+        email:
+            - Email:
+                message: 'This is not a valid email'
+                checkMX: true
+        message:
+            - Regex:
+                pattern: '/^[a-z !@#$%^\x26*()-_+=;:\x27\x22?,\.]{10,512}$/'
+                message: 'Bad'

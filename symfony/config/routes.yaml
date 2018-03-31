@@ -1,0 +1,11 @@
+index:
+    path: /
+    controller: App\Controller\DefaultController::index
+
+anno:
+    path: /anno
+    controller: App\Controller\DefaultController::anno
+
+show:
+    path: /show
+    controller: App\Controller\DefaultController::show

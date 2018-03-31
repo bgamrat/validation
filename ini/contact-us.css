@@ -1,0 +1,24 @@
+.contact-us {
+    width: 800px;
+    margin: 0 auto;
+    padding: 25px;
+    border: 1px solid #000;
+}
+.block {
+    margin: 5px 0;
+    padding: 3px;
+}
+.block label {
+    display: block;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+.block button,
+.block input,
+.block textarea {
+    border: 1px solid #999;
+}
+.contact-form .block textarea {
+    width: 700px;
+    height: 300px;
+}

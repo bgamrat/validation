@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML5 Validation Styling</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                height: 100%;
+            }
+            .form-block {
+                border: 1px solid #000;
+                margin: 15px;
+                padding: 15px;
+                display: inline-block;
+                min-width: 250px;
+                width: calc(30% - 60px);
+                overflow: visible;
+                vertical-align: top;
+            }
+            /* Disable the browser styling for invalid inputs */
+            .with-css-and-js .form-control[required]:invalid {
+                box-shadow: none;
+            }
+            .with-css .form-control:valid,
+            .with-css-and-js .form-control:valid
+            {
+                box-shadow: 0 0 5px 3px #2f2;
+            }
+            .with-css .form-control:invalid,
+            .with-css-and-js .form-control.invalid,
+            .with-css-and-js .form-control.invalid[required] {
+                box-shadow: 0 0 3px 3px #f44277;
+            }
+            #validity-state {
+                margin: 10px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>HTML5 Validation Styling</h1>
+        <div class="row">
+            <ul>
+                <li>
+                    If any of the form attributes contains invalid data, the
+                    browser will not submit the form
+                </li>
+                <li>
+                    You may use the default HTML5 styling, extend it with CSS
+                    or replace it using CSS and JavaScript.
+                </li>
+                <li>To change the messages, you must use JavaScript</li>
+                <li>
+                    Ref: <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation">Form data validation</a>
+                </li>
+            </ul>
+            <div class="form-block">
+                <h2>Default HTML5 Validation Styling <small>Browser dependent</small></h2>
+                <ul>
+                    <li>
+                        Without any styling, the browser will add an indicator if an input element has invalid data
+                    </li>
+                    <li>
+                        The browser will also set a message
+                    </li>
+                </ul>
+                <form>
+                    <label for="zip">Zip</label>
+                    <input id="zip" type="text" pattern="^\d{5}(-\d{4})?$" required>
+                    <button type="submit">Go</button>
+                </form>
+            </div>
+            <div class="form-block with-css">
+                <h2>CSS HTML5 Validation Styling</h2>
+                <ul>
+                    <li>
+                        You may use the <em>:valid</em> and <em>:invalid</em> pseudoclasses to control the styling
+                    </li>
+                    <li>
+                        The message will still be set by the browser
+                    </li>
+                </ul>
+                <form>
+                    <label for="zip-css">Zip</label>
+                    <input class="form-control" id="zip-css" type="text" pattern="^\d{5}(-\d{4})?$" required>
+                    <button type="submit">Go</button>
+                </form>
+            </div>
+            <div class="form-block with-css-and-js">
+                <h2>JavaScript and CSS HTML5 Validation Styling</h2>
+                <ul>
+                    <li>
+                        Disable the HTML5 styling with and use your own
+                    </li>
+                    <li>
+                        Set your own message with <code>setCustomValidity()</code>
+                    </li>
+                </ul>
+                <form>
+                    <label for="zip-css-and-js">Zip</label>
+                    <input class="form-control" id="zip-css-and-js" type="text" pattern="^\d{5}(-\d{4})?$" required>
+                    <button type="submit">Go</button>
+                    <h3>Validity State</h3>
+                    <pre id="validity-state">
+                    </pre>
+                </form>
+            </div>
+        </div>
+        <script>
+            document.getElementById("zip-css-and-js").addEventListener("change", function (evt) {
+                var validityState = '';
+                var v;
+                for( v in this.validity ) {
+                    validityState += v + ": " + this.validity[v] + "\n";
+                }
+                document.getElementById("validity-state").textContent = validityState;
+                if( this.reportValidity() === false ) {
+                    this.classList.add("invalid");
+                    this.setCustomValidity("This isn't a valid US zip code")
+                } else {
+                    this.classList.remove("invalid");
+                    this.setCustomValidity("");
+                }
+            });
+        </script>
+    </body>
+</html>
