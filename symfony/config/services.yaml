@@ -24,12 +24,3 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-    app.contact.form.yaml:
-        class: App\Form\ContactYamlType
-        arguments: ["@validator"]
-
-    app.contact.form.annotation:
-        class: App\Form\ContactAnnotationType
-        arguments: ["@validator"]

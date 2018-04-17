@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Entity\ContactAnnotation;
 
 class ContactAnnotationType extends AbstractType
@@ -17,9 +18,9 @@ class ContactAnnotationType extends AbstractType
 
     private $validatorMetadata;
 
-    public function __construct( $container )
+    public function __construct( ValidatorInterface $validator )
     {
-        $metadata = $container
+        $metadata = $validator
                 ->getMetadataFor( 'App\Entity\ContactAnnotation' );
         $this->validatorMetadata = $metadata;
     }
