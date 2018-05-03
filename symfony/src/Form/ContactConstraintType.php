@@ -21,7 +21,7 @@ class ContactConstraintType extends AbstractType
         $builder
                 ->add( 'name', TextType::class, [
                     'required' => true,
-                    'attr' => ['pattern' => '^\w{2,32} \w{2,32}$', 'data-message' => 'Bad'],
+                    'attr' => ['pattern' => '^\w{2,32} \w{2,32}$', 'data-message' => 'Invalid name'],
                     'constraints' => [
                         new Regex( ['pattern' => '/^\w{2,32} \w{2,32}$/'] )
                     ],
@@ -31,9 +31,9 @@ class ContactConstraintType extends AbstractType
                     'constraints' => [new Email()]] )
                 ->add( 'message', TextareaType::class, [
                     'required' => true,
-                    'attr' => [ 'data-pattern' => '^[a-z !@#$%^\x26*()-_+=;:\x27\x22?,\.]{10,512}$'],
+                    'attr' => [ 'data-pattern' => '/^[a-z !@#$%^\x26*()-_+=;:\x27\x22?,\.]{10,512}$/i'],
                     'constraints' => [
-                        new Regex( ['pattern' => '/^[a-z !@#$%^\x26*()-_+=;:\x27\x22?,\.]{10,512}$/'] )
+                        new Regex( ['pattern' => '/^[a-z !@#$%^\x26*()-_+=;:\x27\x22?,\.]{10,512}$/i'] )
             ]] )
         ;
     }

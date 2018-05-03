@@ -90,10 +90,29 @@ class ContactAnnotationType extends AbstractType
                 $patternAndMessage[$patternAttribute] = $patternAndMessage['pattern'];
                 unset( $patternAndMessage['pattern'] );
             }
+            else
+            {
+                $patternAndMessage[$patternAttribute] = anchorCheck( $patternAndMessage[$patternAttribute] );
+            }
             $patternAndMessage['data-message'] = $patternAndMessage['message'];
             unset( $patternAndMessage['message'] );
             return $patternAndMessage;
         }
+    }
+
+    function anchorCheck( $patternAttribute )
+    {
+        $pa = $patternAttribute;
+        // Remove the anchors for pattern attributes
+        if( strpos( $pa, '^' ) === 0 )
+        {
+            $pa = substr( $pa, 1 );
+        }
+        if( strpos( $pa, '$' ) === strlen( $pa ) - 1 )
+        {
+            $pa = substr( $pa, -1 );
+        }
+        return $pa;
     }
 
 }

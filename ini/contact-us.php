@@ -8,10 +8,10 @@ $ini = parse_ini_file( 'contact-us.ini', true );
 // Set all the validation
 $definition = [
     'contact-name' => [ 'filter' => FILTER_VALIDATE_REGEXP,
-        'options' => ['regexp' => '/' . $ini['contact-name']['V'] . '/i']],
+        'options' => ['regexp' => '/^' . $ini['contact-name']['V'] . '$/i']],
     'email' => ['filter' => FILTER_VALIDATE_EMAIL],
     'message' => [ 'filter' => FILTER_VALIDATE_REGEXP,
-        'options' => ['regexp' => '/' . $ini['message']['V'] . '/i']],
+        'options' => ['regexp' => $ini['message']['V']]],
     'subscribe' => ['filter' => FILTER_VALIDATE_REGEXP,
         'options' => ['regexp' => '/^on$/', 'default' => 'off']]
 ];
@@ -21,7 +21,7 @@ $data = array_fill_keys( array_keys( $definition ), '' );
 
 $method = $_SERVER['REQUEST_METHOD'];
 // If this is a form submission
-if ($method === 'POST' )
+if( $method === 'POST' )
 {
     // Be optimistic!
     $success = true;
@@ -74,7 +74,7 @@ else
                         <div class="error">
                             <ul>
                                 <?php foreach( $data as $d => $value ) : ?>
-                                    <?php if( empty( $value ) && $ini[$d]['R'] === "true" && !empty($ini[$d]['M'])) : ?>
+                                    <?php if( empty( $value ) && $ini[$d]['R'] === "true" && !empty( $ini[$d]['M'] ) ) : ?>
                                         <li><?= $ini[$d]['M'] ?></li>
                                     <?php endif ?>
                                 <?php endforeach ?>
@@ -96,7 +96,7 @@ else
                 </div>
                 <div class="block">
                     <label for="message">Message</label>
-                    <textarea <?php if ($method === 'GET') : ?>class="valid"<?php endif ?> id="message" name="message" data-pattern="<?= $ini['message']['V'] ?>" maxlength="<?= $ini['message']['L'] ?>" <?php if( $ini['message']['R'] === 'true' ) : ?>required<?php endif ?>><?= $data['message'] ?></textarea>
+                    <textarea <?php if( $method === 'GET' ) : ?>class="valid"<?php endif ?> id="message" name="message" data-pattern="<?= $ini['message']['V'] ?>" maxlength="<?= $ini['message']['L'] ?>" <?php if( $ini['message']['R'] === 'true' ) : ?>required<?php endif ?>><?= $data['message'] ?></textarea>
                 </div>
                 <div class="block">
                     <label for="subscribe"><input id="subscribe" name="subscribe" type="checkbox" checked> Subscribe</label>

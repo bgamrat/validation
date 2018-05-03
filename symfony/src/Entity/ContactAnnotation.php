@@ -30,7 +30,7 @@ class ContactAnnotation
      * @ORM\Column(name="name", type="text", nullable=false, unique=false)
      * @Assert\Regex(
      *     pattern="/^\w{2,} \w{2,}$/",
-     *     htmlPattern="^\w{2,} \w{2,}$",
+     *     htmlPattern="\w{2,} \w{2,}",
      *     message="Invalid name",
      *     match=true)
      */
@@ -46,9 +46,13 @@ class ContactAnnotation
      * @ORM\Column(name="message", type="text", nullable=false, unique=false)
      * @Assert\Regex(
      *     pattern="/^[a-z !@#$%^\x26*()-_+=;:\x27\x22?,\.]{10,512}$/",
-     *     htmlPattern = "^[a-z !@#$%^\x26*()-_+=;:\x27\x22?,\.]{10,512}$",
+     *     htmlPattern = "/^[a-z !@#$%^\x26*()-_+=;:\x27\x22?,\.]{10,512}$/i",
      *     message = "Invalid message",
      *     match=true)
+     *
+     * The htmlPattern includes the slashes and flags because the message is
+     * a text type and will be entered using a textarea.  Textareas do not
+     * support pattern attributes.
      */
     protected $message;
 
