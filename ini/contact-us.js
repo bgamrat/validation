@@ -13,3 +13,4 @@ document.getElementById("message").addEventListener("change", function (evt) {
         this.setCustomValidity("");
     }
 });
+// This approach may also be used to use JavaScript to handle validation of other inputs

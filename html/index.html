@@ -95,8 +95,11 @@
                     <li>
                         Set your own message with <code>setCustomValidity()</code>
                     </li>
+                    <li>
+                        The browser is handling the validation, but you're controlling the display and message
+                    </li>
                 </ul>
-                <form>
+                <form id="zip-form">
                     <label for="zip-css-and-js">Zip</label>
                     <input class="form-control" id="zip-css-and-js" type="text" pattern="\d{5}(-\d{4})?" required>
                     <button type="submit">Go</button>
@@ -114,7 +117,7 @@
                     validityState += v + ": " + this.validity[v] + "\n";
                 }
                 document.getElementById("validity-state").textContent = validityState;
-                if( this.reportValidity() === false ) {
+                if( document.getElementById("zip-form").reportValidity() === false ) {
                     this.classList.add("invalid");
                     this.setCustomValidity("This isn't a valid US zip code")
                 } else {
